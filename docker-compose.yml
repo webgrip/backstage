@@ -1,0 +1,13 @@
+services:
+  backstage:
+    container_name: backstage
+    image: webgrip/backstage:0.1.0
+    pull_policy: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+        - ./app-config.yaml:/app/app-config.yaml:ro
+    ports:
+      - "3000:3000"
+      - "7007:7007"
