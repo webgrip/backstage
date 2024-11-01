@@ -6,6 +6,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      target: final
+    env_file:
+      - .env
     volumes:
         - ./app-config.yaml:/app/app-config.yaml:ro
     ports:

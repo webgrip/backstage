@@ -1,6 +1,6 @@
 app:
   title: Backstage Example App
-  baseUrl: http://localhost:3000
+  baseUrl: http://localhost:7007
   experimental:
     packages: all # ✨
 
@@ -32,9 +32,9 @@ backend:
   # Used for enabling authentication, secret is shared by all backend plugins
   # See https://backstage.io/docs/auth/service-to-service-auth for
   # information on the format
-  # auth:
-  #   keys:
-  #     - secret: ${BACKEND_SECRET}
+#   auth:
+#     keys:
+#       - secret: ${BACKEND_SECRET}
 
   auth:
     # TODO: once plugins have been migrated we can remove this, but right now it
@@ -48,7 +48,7 @@ backend:
     client: better-sqlite3
     connection: ':memory:'
   cors:
-    origin: http://localhost:3000
+    origin: http://localhost:7007
     methods: [GET, HEAD, PATCH, POST, PUT, DELETE]
     credentials: true
   csp:
@@ -198,9 +198,9 @@ kubernetes:
 #  baseUrl: http://localhost:5050/allure-docker-service
 
 integrations:
-  github:
-    - host: github.com
-      token: ${GITHUB_TOKEN}
+#  github:
+#    - host: github.com
+#      token: ${GITHUB_TOKEN}
   ### Example for how to add your GitHub Enterprise instance using the API:
   # - host: ghe.example.net
   #   apiBaseUrl: https://ghe.example.net/api/v3
@@ -285,10 +285,10 @@ catalog:
 
     # Backstage example entities
     - type: file
-      target: ../catalog-model/examples/all.yaml
+      target: ./examples/all.yaml
     # Backstage example groups and users
     - type: file
-      target: ../catalog-model/examples/acme-corp.yaml
+      target: ./examples/webgrip-corp.yaml
       rules:
         - allow: [User, Group]
     # Example component for github-actions and TechDocs
@@ -332,11 +332,15 @@ auth:
 #      development:
 #        clientId: ${AUTH_GOOGLE_CLIENT_ID}
 #        clientSecret: ${AUTH_GOOGLE_CLIENT_SECRET}
-#    github:
-#      development:
-#        clientId: ${AUTH_GITHUB_CLIENT_ID}
-#        clientSecret: ${AUTH_GITHUB_CLIENT_SECRET}
+    github:
+      development:
+        clientId: ${AUTH_GITHUB_CLIENT_ID}
+        clientSecret: ${AUTH_GITHUB_CLIENT_SECRET}
+#        Uncomment if you are using GitHub Enterprise
 #        enterpriseInstanceUrl: ${AUTH_GITHUB_ENTERPRISE_INSTANCE_URL}
+        signIn:
+          resolvers:
+            - resolver: usernameMatchingUserEntityName
 #    gitlab:
 #      development:
 #        clientId: ${AUTH_GITLAB_CLIENT_ID}

@@ -58,7 +58,7 @@ RUN mkdir packages/backend/dist/skeleton packages/backend/dist/bundle \
     && tar xzf packages/backend/dist/bundle.tar.gz -C packages/backend/dist/bundle
 
 # Stage 3 - Build the actual backend image and install production dependencies
-FROM node:20-bookworm-slim
+FROM node:20-bookworm-slim AS final
 
 # Set Python interpreter for `node-gyp` to use
 ENV PYTHON=/usr/bin/python3
@@ -106,7 +106,7 @@ COPY --from=build --chown=node:node /app/packages/backend/dist/bundle/ ./
 COPY --chown=node:node app-config*.yaml ./
 
 # This will include the examples, if you don't need these simply remove this line
-#COPY --chown=node:node examples ./examples
+COPY --chown=node:node ./examples ./examples
 
 # This switches many Node.js dependencies to production mode.
 ENV NODE_ENV=production
