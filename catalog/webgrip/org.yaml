@@ -2,9 +2,11 @@ apiVersion: backstage.io/v1alpha1
 kind: Group
 metadata:
   name: webgrip-corp
+  namespace: webgrip
+  title: WebGrip
   description: The WebGrip organization
   links:
-    - url: http://www.acme.com/
+    - url: http://www.webgrip.com/
       title: Website
     - url: https://meta.wikimedia.org/wiki/
       title: Intranet
@@ -14,22 +16,18 @@ spec:
     displayName: WebGrip
     email: ryan@webgrip.nl
     picture: https://api.dicebear.com/7.x/identicon/svg?seed=Maggie&flip=true&backgroundColor=ffdfbf
-  children: [infrastructure]
+  children: [group:webgrip/infrastructure]
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Location
 metadata:
   name: webgrip-groups
+  namespace: webgrip
   description: A collection of all the groups within the WebGrip organisation
 spec:
   targets:
     - ./infrastructure-group.yaml
-    - ./boxoffice-group.yaml
     - ./backstage-group.yaml
-    - ./team-a-group.yaml
-    - ./team-b-group.yaml
-    - ./team-c-group.yaml
-    - ./team-d-group.yaml
 ---
 apiVersion: backstage.io/v1alpha1
 kind: User
@@ -37,4 +35,4 @@ metadata:
   name: Ryangr0
   description: The main user that's able to log in
 spec:
-  memberOf: [guests]
+  memberOf: [group:webgrip/infrastructure, group:webgrip/backstage, guest]

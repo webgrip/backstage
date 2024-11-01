@@ -41,14 +41,14 @@ COPY --from=packages --chown=node:node /app .
 COPY --from=packages --chown=node:node /app/.yarn ./.yarn
 COPY --from=packages --chown=node:node /app/.yarnrc.yml  ./
 
-RUN #yarn set version berry
-
 RUN --mount=type=cache,target=/home/node/.cache/yarn,sharing=locked,uid=1000,gid=1000 \
     yarn install --immutable || \
     (echo "Yarn install failed. Outputting build logs:" && \
     find /tmp -name 'build.log' -exec cat {} +)
 
 COPY --chown=node:node . .
+
+RUN yarn --cwd packages/backend add @backstage/plugin-catalog-backend-module-github
 
 RUN NODE_OPTIONS="--max_old_space_size=4096" yarn tsc
 RUN yarn --cwd packages/backend build

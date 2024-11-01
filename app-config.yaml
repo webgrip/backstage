@@ -198,9 +198,9 @@ kubernetes:
 #  baseUrl: http://localhost:5050/allure-docker-service
 
 integrations:
-#  github:
-#    - host: github.com
-#      token: ${GITHUB_TOKEN}
+  github:
+    - host: github.com
+      token: ${GITHUB_TOKEN}
   ### Example for how to add your GitHub Enterprise instance using the API:
   # - host: ghe.example.net
   #   apiBaseUrl: https://ghe.example.net/api/v3
@@ -245,6 +245,83 @@ catalog:
         - Domain
         - Location
   providers:
+    githubOrg:
+      id: production
+      githubUrl: https://github.com
+      orgs: [ 'webgrip' ]
+      schedule:
+        initialDelay: { seconds: 30 }
+        frequency: { hours: 1 }
+        timeout: { minutes: 50 }
+    github:
+      mainBranches:
+        organization: 'webgrip' # string
+        catalogPath: '/catalog-info.yaml' # string
+        filters:
+          branch: 'main' # string
+          repository: '.*' # Regex
+        schedule: # same options as in SchedulerServiceTaskScheduleDefinition
+          # supports cron, ISO duration, "human duration" as used in code
+          frequency: { minutes: 1 }
+          # supports ISO duration, "human duration" as used in code
+          timeout: { minutes: 3 }
+      masterBranches:
+        organization: 'webgrip' # string
+        catalogPath: '/catalog-info.yaml' # string
+        filters:
+          branch: 'master' # string
+          repository: '.*' # Regex
+        schedule: # same options as in SchedulerServiceTaskScheduleDefinition
+          # supports cron, ISO duration, "human duration" as used in code
+          frequency: { minutes: 1 }
+          # supports ISO duration, "human duration" as used in code
+          timeout: { minutes: 3 }
+#      customProviderId:
+#        organization: 'new-org' # string
+#        catalogPath: '/custom/path/catalog-info.yaml' # string
+#        filters: # optional filters
+#          branch: 'develop' # optional string
+#          repository: '.*' # optional Regex
+#      wildcardProviderId:
+#        organization: 'new-org' # string
+#        catalogPath: '/groups/**/*.yaml' # this will search all folders for files that end in .yaml
+#        filters: # optional filters
+#          branch: 'develop' # optional string
+#          repository: '.*' # optional Regex
+#      topicProviderId:
+#        organization: 'backstage' # string
+#        catalogPath: '/catalog-info.yaml' # string
+#        filters:
+#          branch: 'main' # string
+#          repository: '.*' # Regex
+#          topic: 'backstage-exclude' # optional string
+#      topicFilterProviderId:
+#        organization: 'backstage' # string
+#        catalogPath: '/catalog-info.yaml' # string
+#        filters:
+#          branch: 'main' # string
+#          repository: '.*' # Regex
+#          topic:
+#            include: [ 'backstage-include' ] # optional array of strings
+#            exclude: [ 'experiments' ] # optional array of strings
+#      validateLocationsExist:
+#        organization: 'backstage' # string
+#        catalogPath: '/catalog-info.yaml' # string
+#        filters:
+#          branch: 'main' # string
+#          repository: '.*' # Regex
+#        validateLocationsExist: true # optional boolean
+#      visibilityProviderId:
+#        organization: 'backstage' # string
+#        catalogPath: '/catalog-info.yaml' # string
+#        filters:
+#          visibility:
+#            - public
+#            - internal
+#      enterpriseProviderId:
+#        host: ghe.example.net
+#        organization: 'backstage' # string
+#        catalogPath: '/catalog-info.yaml' # string
     backstageOpenapi:
       plugins:
         - catalog
@@ -284,8 +361,8 @@ catalog:
     # backend, for example packages/backend/.
 
     # Backstage example entities
-    - type: file
-      target: ./catalog/all.yaml
+#    - type: file
+#      target: ./catalog/all.yaml
     # Backstage example groups and users
     - type: file
       target: ./catalog/webgrip-corp.yaml
