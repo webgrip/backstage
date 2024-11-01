@@ -285,10 +285,10 @@ catalog:
 
     # Backstage example entities
     - type: file
-      target: ./examples/all.yaml
+      target: ./catalog/all.yaml
     # Backstage example groups and users
     - type: file
-      target: ./examples/webgrip-corp.yaml
+      target: ./catalog/webgrip-corp.yaml
       rules:
         - allow: [User, Group]
     # Example component for github-actions and TechDocs
