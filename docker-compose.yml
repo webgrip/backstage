@@ -1,17 +1,33 @@
 services:
+#  backstage:
+#    container_name: backstage
+#    image: webgrip/backstage:0.1.0
+#    pull_policy: always
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#      target: final
+#    env_file:
+#      - .env
+#    volumes:
+#        - ./app-config.yaml:/app/app-config.yaml:ro
+#        - /var/run/docker.sock:/var/run/docker.sock
+#    ports:
+#      - "3000:3000"
+#      - "7007:7007"
   backstage:
     container_name: backstage
-    image: webgrip/backstage:0.1.0
-    pull_policy: always
     build:
       context: .
-      dockerfile: Dockerfile
-      target: final
+      dockerfile: Dockerfile-multistage
+      target: development
     env_file:
       - .env
     volumes:
-        - ./app-config.yaml:/app/app-config.yaml:ro
-        - /var/run/docker.sock:/var/run/docker.sock
+#      - .:/app:cached
+      - /app/node_modules
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./app-config.yaml:/app/app-config.yaml:ro
     ports:
       - "3000:3000"
       - "7007:7007"

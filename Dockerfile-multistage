@@ -1,0 +1,124 @@
+# syntax=docker/dockerfile:1.4
+
+############################
+# Stage 1 - Base Image
+############################
+FROM node:20-bookworm-slim AS base
+
+# Install system dependencies required for building native modules
+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+    apt-get update && \
+    apt-get install -y --no-install-recommends \
+    python3 \
+    g++ \
+    build-essential \
+    git \
+    ca-certificates \
+    cmake \
+    ninja-build \
+    libsqlite3-dev && \
+    rm -rf /var/lib/apt/lists/*
+
+# Set the working directory
+WORKDIR /app
+
+# Copy core application files
+COPY package.json yarn.lock ./
+COPY .yarn ./.yarn
+COPY .yarnrc.yml ./
+
+############################
+# Stage 2 - Development Dependencies
+############################
+FROM base AS dev-dependencies
+
+COPY packages packages
+COPY plugins plugins
+
+# Install all dependencies (including devDependencies)
+RUN --mount=type=cache,target=/home/node/.cache/yarn,sharing=locked,uid=1000,gid=1000 \
+    yarn install || \
+    (echo "Yarn install failed. Outputting build logs:" && \
+    find /tmp -name 'build.log' -exec cat {} +)
+
+############################
+# Stage 3 - Production Dependencies
+############################
+FROM base AS prod-dependencies
+
+# Set NODE_ENV to production to install only production dependencies
+ENV NODE_ENV=production
+
+# Install production dependencies
+RUN --mount=type=cache,target=/home/node/.cache/yarn,sharing=locked,uid=1000,gid=1000 \
+    yarn install --immutable --production
+
+############################
+# Stage 4 - Build Stage
+############################
+FROM prod-dependencies AS build
+
+# Copy application source code
+COPY . .
+
+# Build the application
+RUN NODE_OPTIONS="--max_old_space_size=4096" yarn tsc
+RUN yarn --cwd packages/backend build
+
+RUN mkdir packages/backend/dist/skeleton packages/backend/dist/bundle \
+    && tar xzf packages/backend/dist/skeleton.tar.gz -C packages/backend/dist/skeleton \
+    && tar xzf packages/backend/dist/bundle.tar.gz -C packages/backend/dist/bundle
+
+############################
+# Stage 5 - Development Environment
+############################
+FROM base AS development
+
+# Copy development dependencies
+COPY --from=dev-dependencies --chown=node:node /app /app
+
+# Switch to a non-root user for security
+USER node
+
+# Copy application source code
+COPY --chown=node:node . .
+
+# Set environment variables for development
+ENV NODE_ENV=development
+ENV PORT=7000
+ENV PYTHON=/usr/bin/python3
+
+# Expose the development port
+EXPOSE 7000
+
+# Start the application in development mode
+CMD ["node", "packages/backend", "--config", "app-config.yaml"]
+
+############################
+# Stage 6 - Production Environment
+############################
+FROM base AS production
+
+# Copy production dependencies
+COPY --from=prod-dependencies /app/node_modules /app/node_modules
+
+# Copy built application files
+COPY --from=build /app/packages/backend/dist/bundle /app/packages/backend/dist/bundle
+COPY --from=build /app/packages/backend/dist/skeleton /app/packages/backend/dist/skeleton
+COPY --from=build /app/app-config*.yaml /app/
+COPY --from=build /app/package.json /app/
+COPY --from=build /app/yarn.lock /app/
+
+# Switch to a non-root user for security
+USER node
+
+# Set environment variables for production
+ENV NODE_ENV=production
+ENV PORT=7007
+ENV PYTHON=/usr/bin/python3
+
+# Expose the production port
+EXPOSE 7007
+
+# Start the application in production mode
+CMD ["node", "packages/backend", "--config", "app-config.yaml"]

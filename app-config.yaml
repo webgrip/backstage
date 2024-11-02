@@ -1,6 +1,6 @@
 app:
   title: Backstage Example App
-  baseUrl: http://localhost:7007
+  baseUrl: http://localhost:3000
   experimental:
     packages: all # ✨
 
@@ -48,7 +48,7 @@ backend:
     client: better-sqlite3
     connection: ':memory:'
   cors:
-    origin: http://localhost:7007
+    origin: http://localhost:3000
     methods: [GET, HEAD, PATCH, POST, PUT, DELETE]
     credentials: true
   csp:
