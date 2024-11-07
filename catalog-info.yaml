@@ -4,6 +4,8 @@ metadata:
   name: backstage
   description: |
     Backstage is an open-source developer portal that puts the developer experience first.
+  labels:
+    tier: "2"
   links:
     - title: Website
       url: http://backstage.io
@@ -13,11 +15,40 @@ metadata:
       url: https://backstage.io/storybook
     - title: Discord Chat
       url: https://discord.com/invite/EBHEGzX
+    - url: https://monitoring-platform.test
+      title: Development URL
+      icon: dashboard
+  tags:
+    - backstage
   annotations:
-    github.com/project-slug: backstage/backstage
+    github.com/project-slug: webgrip/backstage
     backstage.io/techdocs-ref: dir:.
-    lighthouse.com/website-url: https://backstage.io
+    backstage.io/kubernetes-label-selector: 'app.kubernetes.io/name=backstage'
+    backstage.io/code-coverage: enabled
 spec:
-  type: library
-  owner: CNCF
+  type: service
+  owner: group:webgrip/backstage
   lifecycle: experimental
+  system: backstage-system
+---
+apiVersion: backstage.io/v1alpha1
+kind: Domain
+metadata:
+  name: operations-domain
+  title: Operations
+  description: |
+    The operations domain is responsible for all things having to do with operations
+spec:
+  owner: group:webgrip/infrastructure
+---
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  title: Backstage
+  name: backstage-system
+  description: |
+    The monitoring platform system is responsible for all things related to monitoring and observability.
+    This includes Grafana dashboards.
+spec:
+  owner: group:webgrip/backstage
+  domain: operations-domain
