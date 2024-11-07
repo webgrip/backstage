@@ -15,6 +15,30 @@ services:
     ports:
       - "3000:3000"
       - "7007:7007"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.middlewares.traefik-https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.middlewares.sslheaders.headers.customrequestheaders.X-Forwarded-Proto=https"
+      - "traefik.http.routers.backstage.entrypoints=http"
+      - "traefik.http.routers.backstage.rule=Host(`backstage.test`)"
+      - "traefik.http.routers.backstage.middlewares=traefik-https-redirect"
+      - "traefik.http.routers.backstage-secure.entrypoints=https"
+      - "traefik.http.routers.backstage-secure.rule=Host(`backstage.test`)"
+      - "traefik.http.routers.backstage-secure.tls=true"
+      - "traefik.http.routers.backstage-secure.tls.domains[0].main=backstage.test"
+      - "traefik.http.routers.backstage-secure.tls.domains[0].sans=*.backstage.test"
+      - "traefik.http.routers.backstage-secure.service=backstage"
+      - "traefik.http.services.backstage.loadbalancer.server.scheme=https"
+      - "traefik.http.services.backstage.loadbalancer.server.port=7007"
+
+  backstage-mkcert:
+    container_name: backstage-mkcert
+    image: webgrip/traefik-local-development-mkcert:latest
+    pull_policy: always
+    volumes:
+      - ~/.config/mkcert:/root/.local/share/mkcert:ro
+      - certificate-data:/certificate-data:rw
+    entrypoint: [ "/app/entrypoint.sh", "backstage.test" ]
 #  backstage:
 #    container_name: backstage
 #    build:
@@ -31,3 +55,12 @@ services:
 #    ports:
 #      - "3000:3000"
 #      - "7007:7007"
+
+networks:
+  default:
+    external: true
+    name: vendic
+
+volumes:
+  certificate-data:
+    external: true

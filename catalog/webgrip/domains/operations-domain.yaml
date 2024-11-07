@@ -1,0 +1,28 @@
+apiVersion: backstage.io/v1alpha1
+kind: Domain
+metadata:
+  name: operations-domain
+  namespace: webgrip
+  title: Operations
+  description: |
+    The operations domain is responsible for all things having to do with operations
+  labels:
+    tier: "2"
+  annotations:
+  tags:
+    - operations
+    - infrastructure
+    - monitoring
+    - telemetry
+  links:
+    - url: http://example.com/domain/operations/
+      title: Readme
+      icon: book
+      type: website
+    - url: http://monitoring-platform.test/dashboard/operations
+      title: Dashboard
+      icon: dashboard
+      type: website
+spec:
+  owner: group:webgrip/infrastructure
+  type: product-area

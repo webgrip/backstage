@@ -15,8 +15,8 @@ metadata:
       url: https://backstage.io/storybook
     - title: Discord Chat
       url: https://discord.com/invite/EBHEGzX
-    - url: https://monitoring-platform.test
-      title: Development URL
+    - title: Development URL
+      url: https://backstage.test
       icon: dashboard
   tags:
     - backstage
@@ -32,23 +32,12 @@ spec:
   system: backstage-system
 ---
 apiVersion: backstage.io/v1alpha1
-kind: Domain
-metadata:
-  name: operations-domain
-  title: Operations
-  description: |
-    The operations domain is responsible for all things having to do with operations
-spec:
-  owner: group:webgrip/infrastructure
----
-apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
   title: Backstage
   name: backstage-system
   description: |
-    The monitoring platform system is responsible for all things related to monitoring and observability.
-    This includes Grafana dashboards.
+    Backstage is an open-source developer portal that puts the developer experience first.
 spec:
   owner: group:webgrip/backstage
   domain: operations-domain

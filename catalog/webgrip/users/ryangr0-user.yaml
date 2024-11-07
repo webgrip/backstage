@@ -1,0 +1,7 @@
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: Ryangr0
+  description: The main user that's able to log in
+spec:
+  memberOf: [group:webgrip/infrastructure, group:webgrip/backstage, guest]
