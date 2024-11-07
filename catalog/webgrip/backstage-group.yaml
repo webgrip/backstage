@@ -10,5 +10,5 @@ spec:
     displayName: Backstage
     email: backstage@webgrip.nl #TODO change email
     picture: https://api.dicebear.com/7.x/identicon/svg?seed=Fluffy&backgroundColor=ffdfbf
-  parent: webgrip/infrastructure
+  parent: group:webgrip/infrastructure
   children: []
