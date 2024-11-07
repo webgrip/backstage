@@ -40,4 +40,4 @@ metadata:
     Backstage is an open-source developer portal that puts the developer experience first.
 spec:
   owner: group:webgrip/backstage
-  domain: operations-domain
+  domain: webgrip/operations-domain
