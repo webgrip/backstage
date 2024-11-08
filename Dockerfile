@@ -49,6 +49,7 @@ RUN --mount=type=cache,target=/home/node/.cache/yarn,sharing=locked,uid=1000,gid
 COPY --chown=node:node . .
 
 RUN yarn --cwd packages/backend add @backstage/plugin-catalog-backend-module-github
+RUN yarn --cwd packages/backend add @backstage/plugin-catalog-backend-module-github-org
 
 RUN NODE_OPTIONS="--max_old_space_size=4096" yarn tsc
 RUN yarn --cwd packages/backend build

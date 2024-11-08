@@ -1,0 +1,29 @@
+apiVersion: backstage.io/v1alpha1
+kind: Domain
+metadata:
+  name: telemetry-domain
+  namespace: webgrip
+  title: Telemetry
+  description: |
+    The telemetry domain is responsible for all things related to monitoring and observability.
+    This includes Grafana dashboards.
+  labels:
+    tier: "2"
+  annotations:
+  tags:
+    - telemetry
+    - monitoring
+    - logs
+    - observability
+  links:
+    - url: http://example.com/domain/telemetry/
+      title: Readme
+      icon: book
+      type: website
+    - url: http://monitoring-platform.test/dashboard/telemetry
+      title: Dashboard
+      icon: dashboard
+      type: website
+spec:
+  owner: group:infrastructure
+  type: product-area

@@ -250,7 +250,7 @@ catalog:
       githubUrl: https://github.com
       orgs: [ 'webgrip' ]
       schedule:
-        initialDelay: { seconds: 30 }
+        initialDelay: { seconds: 1 }
         frequency: { hours: 1 }
         timeout: { minutes: 50 }
     github:
@@ -365,9 +365,9 @@ catalog:
 #      target: ./catalog/all.yaml
     # Backstage example groups and users
     - type: file
-      target: ./catalog/webgrip-corp.yaml
+      target: ./catalog/webgrip/webgrip-corporation.yaml
       rules:
-        - allow: [User, Group]
+       - allow: [User, Group, Location]
     # Example component for github-actions and TechDocs
     - type: file
       target: ../../plugins/github-actions/examples/sample.yaml
@@ -417,7 +417,7 @@ auth:
 #        enterpriseInstanceUrl: ${AUTH_GITHUB_ENTERPRISE_INSTANCE_URL}
         signIn:
           resolvers:
-            - resolver: usernameMatchingUserEntityName
+            - resolver: emailMatchingUserEntityProfileEmail
 #    gitlab:
 #      development:
 #        clientId: ${AUTH_GITLAB_CLIENT_ID}

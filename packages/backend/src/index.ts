@@ -16,6 +16,26 @@
 
 import { createBackend } from '@backstage/backend-defaults';
 import { createBackendFeatureLoader } from '@backstage/backend-plugin-api';
+import { createBackendModule } from '../../backend-plugin-api/src';
+import { githubOrgEntityProviderTransformsExtensionPoint } from '../../../plugins/catalog-backend-module-github-org/src';
+import {myTeamTransformer, myUserTransformer} from "./transformers";
+
+const githubOrgModule = createBackendModule({
+  pluginId: 'catalog',
+  moduleId: 'github-org-extensions',
+  register(env) {
+    env.registerInit({
+      deps: {
+        githubOrg: githubOrgEntityProviderTransformsExtensionPoint,
+      },
+      async init({ githubOrg }) {
+        githubOrg.setTeamTransformer(myTeamTransformer);
+        githubOrg.setUserTransformer(myUserTransformer);
+      },
+    });
+  },
+});
+
 
 const backend = createBackend();
 
@@ -41,6 +61,8 @@ backend.add(
 );
 backend.add(import('@backstage/plugin-catalog-backend'));
 backend.add(import('@backstage/plugin-catalog-backend-module-github'));
+backend.add(import('@backstage/plugin-catalog-backend-module-github-org'));
+backend.add(githubOrgModule);
 backend.add(import('@backstage/plugin-events-backend'));
 backend.add(import('@backstage/plugin-devtools-backend'));
 backend.add(import('@backstage/plugin-kubernetes-backend'));

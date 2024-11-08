@@ -1,8 +1,0 @@
-apiVersion: backstage.io/v1alpha1
-kind: Location
-metadata:
-  name: webgrip-corp
-  description: A collection of all Backstage entities for WebGrip
-spec:
-  targets:
-    - ./webgrip/org.yaml

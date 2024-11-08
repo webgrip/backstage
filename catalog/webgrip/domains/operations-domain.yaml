@@ -12,8 +12,6 @@ metadata:
   tags:
     - operations
     - infrastructure
-    - monitoring
-    - telemetry
   links:
     - url: http://example.com/domain/operations/
       title: Readme
@@ -24,5 +22,5 @@ metadata:
       icon: dashboard
       type: website
 spec:
-  owner: group:webgrip/infrastructure
+  owner: group:infrastructure
   type: product-area
