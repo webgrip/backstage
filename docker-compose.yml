@@ -32,6 +32,19 @@ services:
       - "traefik.http.services.backstage.loadbalancer.server.scheme=https"
       - "traefik.http.services.backstage.loadbalancer.server.port=7007"
 
+  structurizr:
+    container_name: structurizr
+    image: structurizr/lite:latest
+    volumes:
+      - ./docs/structurizr/config:/usr/local/structurizr/config:ro
+      - ./docs/structurizr/workspace:/usr/local/structurizr/workspace
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=custom-profile
+      - STRUCTURIZR_WORKSPACE_PATH=workspace
+    command: ["java", "--enable-native-access=ALL-UNNAMED", "--add-modules=jdk.incubator.vector", "-jar", "/usr/local/structurizr-lite.war"]
+
   backstage-mkcert:
     container_name: backstage-mkcert
     image: webgrip/traefik-local-development-mkcert:latest

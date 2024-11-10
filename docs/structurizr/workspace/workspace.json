@@ -1,0 +1,391 @@
+{
+  "configuration": {},
+  "description": "Description",
+  "documentation": {},
+  "id": 1,
+  "lastModifiedDate": "2024-11-10T08:26:58Z",
+  "model": {
+    "people": [
+      {
+        "description": "Developer",
+        "group": "Organization/People",
+        "id": "1",
+        "location": "Unspecified",
+        "name": "developer",
+        "properties": {
+          "structurizr.dsl.identifier": "0901c74e-2172-4d44-ab57-f82166ccf826"
+        },
+        "tags": "Element,Person,Builds and maintains applications,Developer"
+      },
+      {
+        "description": "Platform Engineer",
+        "group": "Organization/People",
+        "id": "2",
+        "location": "Unspecified",
+        "name": "platformEngineer",
+        "properties": {
+          "structurizr.dsl.identifier": "16b46723-945f-4820-92c2-558f1560b613"
+        },
+        "tags": "Element,Person,Designs and manages the platform,Platform Engineer"
+      }
+    ],
+    "properties": {
+      "structurizr.groupSeparator": "/"
+    },
+    "softwareSystems": [
+      {
+        "description": "IDE",
+        "documentation": {},
+        "group": "Organization/Developer Control Plane",
+        "id": "3",
+        "location": "Unspecified",
+        "name": "ide",
+        "properties": {
+          "structurizr.dsl.identifier": "683a61ab-ed92-481b-9971-9b040ec2c45e"
+        },
+        "tags": "Element,Software System,PHPStorm,VSCode,etc.,Developer Tool"
+      },
+      {
+        "description": "Database Client",
+        "documentation": {},
+        "group": "Organization/Developer Control Plane",
+        "id": "4",
+        "location": "Unspecified",
+        "name": "dbc",
+        "properties": {
+          "structurizr.dsl.identifier": "b4661972-0cfa-4ecf-9d2b-dc30c7a60610"
+        },
+        "tags": "Element,Software System,Datagrid,MySQL Workbench,etc.,Amazon Web Services - Amazon RDS"
+      },
+      {
+        "description": "GitHub",
+        "documentation": {},
+        "group": "Organization/Developer Control Plane/Version Control",
+        "id": "5",
+        "location": "Unspecified",
+        "name": "github",
+        "properties": {
+          "structurizr.dsl.identifier": "b6c0a5a4-7bbf-4e71-a761-ae55f8514ca5"
+        },
+        "tags": "Element,Software System,Version control platform,Amazon Web Services - AWS CodeCommit"
+      },
+      {
+        "description": "Application Source",
+        "documentation": {},
+        "group": "Organization/Developer Control Plane/Version Control",
+        "id": "6",
+        "location": "Unspecified",
+        "name": "appSource",
+        "properties": {
+          "structurizr.dsl.identifier": "4bb2498f-4370-4611-8b89-caee793d70fc"
+        },
+        "tags": "Element,Software System,Source code for applications,Amazon Web Services - AWS CodeCommit"
+      },
+      {
+        "description": "Workflow Source",
+        "documentation": {},
+        "group": "Organization/Developer Control Plane/Version Control",
+        "id": "7",
+        "location": "Unspecified",
+        "name": "workflowSource",
+        "properties": {
+          "structurizr.dsl.identifier": "bef10f75-9c6b-46d1-9f55-f3fdbea0c2eb"
+        },
+        "tags": "Element,Software System,Source code for workflows,Amazon Web Services - AWS CodeCommit"
+      },
+      {
+        "description": "Internal Developer Platform",
+        "documentation": {},
+        "group": "Organization/Developer Control Plane/Service Catalog",
+        "id": "8",
+        "location": "Unspecified",
+        "name": "idp",
+        "properties": {
+          "structurizr.dsl.identifier": "1fe4bb61-a020-4c48-a39f-8ff2fedcf7c6"
+        },
+        "tags": "Element,Software System,Self-service,single point of entry to the platform,Microsoft Azure - Kubernetes Services"
+      },
+      {
+        "description": "CI Pipelines",
+        "documentation": {},
+        "group": "Organization/Integration Delivery Plane/CI/CD Pipeline",
+        "id": "9",
+        "location": "Unspecified",
+        "name": "ci",
+        "properties": {
+          "structurizr.dsl.identifier": "8e875e6f-c7b2-4746-b230-505e0de75069"
+        },
+        "tags": "Element,Software System,GitHub Actions,Amazon Web Services - AWS CodePipeline"
+      },
+      {
+        "description": "CD Pipelines",
+        "documentation": {},
+        "group": "Organization/Integration Delivery Plane/CI/CD Pipeline",
+        "id": "10",
+        "location": "Unspecified",
+        "name": "cd",
+        "properties": {
+          "structurizr.dsl.identifier": "f7e8df84-bded-48e9-a8e1-aab83f1cb837"
+        },
+        "tags": "Element,Software System,GitHub Actions,Amazon Web Services - AWS CodePipeline"
+      },
+      {
+        "description": "Package Registry",
+        "documentation": {},
+        "group": "Organization/Integration Delivery Plane/Registry",
+        "id": "11",
+        "location": "Unspecified",
+        "name": "packageRegistry",
+        "properties": {
+          "structurizr.dsl.identifier": "78d51c53-2bb9-424e-b9c0-14835acdb47d"
+        },
+        "tags": "Element,Software System,Packagist,npm,etc.,Microsoft Azure - Container Registries"
+      },
+      {
+        "description": "Container Registry",
+        "documentation": {},
+        "group": "Organization/Integration Delivery Plane/Registry",
+        "id": "12",
+        "location": "Unspecified",
+        "name": "containerRegistry",
+        "properties": {
+          "structurizr.dsl.identifier": "f38b8a68-e871-4d03-8231-38c9b9ebbbc4"
+        },
+        "tags": "Element,Software System,Docker,etc.,Microsoft Azure - Container Registries"
+      },
+      {
+        "description": "Artifact Registry",
+        "documentation": {},
+        "group": "Organization/Integration Delivery Plane/Registry",
+        "id": "13",
+        "location": "Unspecified",
+        "name": "artifactRegistry",
+        "properties": {
+          "structurizr.dsl.identifier": "9350e0fa-a440-45e6-9052-b606c33fea20"
+        },
+        "tags": "Element,Software System,Artifactory,etc.,Microsoft Azure - Container Registries"
+      },
+      {
+        "description": "Grafana",
+        "documentation": {},
+        "group": "Organization/Monitoring and Logging Plane/Observability",
+        "id": "14",
+        "location": "Unspecified",
+        "name": "grafana",
+        "properties": {
+          "structurizr.dsl.identifier": "919e5abc-51ee-4647-8990-a865987328d1"
+        },
+        "tags": "Element,Software System,Logs/Traces/Metrics visualization,Microsoft Azure - Activity Log,Microsoft Azure - Metrics"
+      },
+      {
+        "description": "Collector",
+        "documentation": {},
+        "group": "Organization/Monitoring and Logging Plane/Observability",
+        "id": "15",
+        "location": "Unspecified",
+        "name": "collector",
+        "properties": {
+          "structurizr.dsl.identifier": "3f4faefc-06db-4de7-ac80-a4793e8d5fc6"
+        },
+        "tags": "Element,Software System,Collects logs,traces,and metrics,Amazon Web Services - AWS X-Ray"
+      },
+      {
+        "description": "Monitoring Tools",
+        "documentation": {},
+        "group": "Organization/Monitoring and Logging Plane/Monitoring",
+        "id": "16",
+        "location": "Unspecified",
+        "name": "monitoring",
+        "properties": {
+          "structurizr.dsl.identifier": "48f490c6-d1de-479c-99fa-956072b7e307"
+        },
+        "tags": "Element,Software System,Tracks system performance and health,Microsoft Azure - Azure Monitor Dashboard"
+      },
+      {
+        "description": "Secret Management Services",
+        "documentation": {},
+        "group": "Organization/Security Plane",
+        "id": "17",
+        "location": "Unspecified",
+        "name": "secretManagement",
+        "properties": {
+          "structurizr.dsl.identifier": "ea1a33c0-1f56-48c1-9986-4165891bfbfe"
+        },
+        "tags": "Element,Software System,Manages secrets and credentials,Microsoft Azure - Network Security Groups"
+      },
+      {
+        "description": "Servers",
+        "documentation": {},
+        "group": "Organization/Resource Plane",
+        "id": "18",
+        "location": "Unspecified",
+        "name": "servers",
+        "properties": {
+          "structurizr.dsl.identifier": "afe65b9d-ea06-4da7-902a-41ce893b1f60"
+        },
+        "tags": "Element,Software System,Physical or virtual machines,Microsoft Azure - Spot VM"
+      },
+      {
+        "description": "Networking",
+        "documentation": {},
+        "group": "Organization/Resource Plane",
+        "id": "19",
+        "location": "Unspecified",
+        "name": "networking",
+        "properties": {
+          "structurizr.dsl.identifier": "9144b694-5712-4598-a006-78dd61d73db6"
+        },
+        "tags": "Element,Software System,Connects servers and services,Microsoft Azure - Virtual Networks"
+      },
+      {
+        "description": "Load Balancers",
+        "documentation": {},
+        "group": "Organization/Resource Plane",
+        "id": "20",
+        "location": "Unspecified",
+        "name": "loadBalancers",
+        "properties": {
+          "structurizr.dsl.identifier": "6aa6dcb6-fe64-4ff6-bbba-d78e56aa19cc"
+        },
+        "tags": "Element,Software System,Distributes incoming network traffic,Amazon Web Services - Elastic Load Balancing"
+      }
+    ]
+  },
+  "name": "Name",
+  "properties": {
+    "structurizr.dsl": "d29ya3NwYWNlIHsKCiAgICBtb2RlbCB7CiAgICAgICAgZ3JvdXAgIk9yZ2FuaXphdGlvbiIgewogICAgICAgICAgICBwcm9wZXJ0aWVzIHsKICAgICAgICAgICAgICAgICJzdHJ1Y3R1cml6ci5ncm91cFNlcGFyYXRvciIgIi8iCiAgICAgICAgICAgIH0KCiAgICAgICAgICAgIGdyb3VwICJQZW9wbGUiIHsKICAgICAgICAgICAgICAgIHBlcnNvbiBkZXZlbG9wZXIgIkRldmVsb3BlciIgIkJ1aWxkcyBhbmQgbWFpbnRhaW5zIGFwcGxpY2F0aW9ucyIgewogICAgICAgICAgICAgICAgICAgIHRhZ3MgIkRldmVsb3BlciIKICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICAgIHBlcnNvbiBwbGF0Zm9ybUVuZ2luZWVyICJQbGF0Zm9ybSBFbmdpbmVlciIgIkRlc2lnbnMgYW5kIG1hbmFnZXMgdGhlIHBsYXRmb3JtIiB7CiAgICAgICAgICAgICAgICAgICAgdGFncyAiUGxhdGZvcm0gRW5naW5lZXIiCiAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgIH0KCiAgICAgICAgICAgIGdyb3VwICJEZXZlbG9wZXIgQ29udHJvbCBQbGFuZSIgewogICAgICAgICAgICAgICAgc29mdHdhcmVTeXN0ZW0gaWRlICJJREUiICJQSFBTdG9ybSwgVlNDb2RlLCBldGMuIiB7CiAgICAgICAgICAgICAgICAgICAgdGFncyAiRGV2ZWxvcGVyIFRvb2wiCiAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgICBzb2Z0d2FyZVN5c3RlbSBkYmMgIkRhdGFiYXNlIENsaWVudCIgIkRhdGFncmlkLCBNeVNRTCBXb3JrYmVuY2gsIGV0Yy4iIHsKICAgICAgICAgICAgICAgICAgICB0YWdzICJBbWF6b24gV2ViIFNlcnZpY2VzIC0gQW1hem9uIFJEUyIKICAgICAgICAgICAgICAgIH0KCiAgICAgICAgICAgICAgICBncm91cCAiVmVyc2lvbiBDb250cm9sIiB7CiAgICAgICAgICAgICAgICAgICAgc29mdHdhcmVTeXN0ZW0gZ2l0aHViICJHaXRIdWIiICJWZXJzaW9uIGNvbnRyb2wgcGxhdGZvcm0iIHsKICAgICAgICAgICAgICAgICAgICAgICAgdGFncyAiQW1hem9uIFdlYiBTZXJ2aWNlcyAtIEFXUyBDb2RlQ29tbWl0IgogICAgICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICAgICAgICBzb2Z0d2FyZVN5c3RlbSBhcHBTb3VyY2UgIkFwcGxpY2F0aW9uIFNvdXJjZSIgIlNvdXJjZSBjb2RlIGZvciBhcHBsaWNhdGlvbnMiIHsKICAgICAgICAgICAgICAgICAgICAgICAgdGFncyAiQW1hem9uIFdlYiBTZXJ2aWNlcyAtIEFXUyBDb2RlQ29tbWl0IgogICAgICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICAgICAgICBzb2Z0d2FyZVN5c3RlbSB3b3JrZmxvd1NvdXJjZSAiV29ya2Zsb3cgU291cmNlIiAiU291cmNlIGNvZGUgZm9yIHdvcmtmbG93cyIgewogICAgICAgICAgICAgICAgICAgICAgICB0YWdzICJBbWF6b24gV2ViIFNlcnZpY2VzIC0gQVdTIENvZGVDb21taXQiCiAgICAgICAgICAgICAgICAgICAgfQogICAgICAgICAgICAgICAgfQoKICAgICAgICAgICAgICAgIGdyb3VwICJTZXJ2aWNlIENhdGFsb2ciIHsKCiAgICAgICAgICAgICAgICAgICAgc29mdHdhcmVTeXN0ZW0gaWRwICJJbnRlcm5hbCBEZXZlbG9wZXIgUGxhdGZvcm0iICJTZWxmLXNlcnZpY2UsIHNpbmdsZSBwb2ludCBvZiBlbnRyeSB0byB0aGUgcGxhdGZvcm0iIHsKICAgICAgICAgICAgICAgICAgICAgICAgdGFncyAiTWljcm9zb2Z0IEF6dXJlIC0gS3ViZXJuZXRlcyBTZXJ2aWNlcyIKICAgICAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgIH0KCiAgICAgICAgICAgIGdyb3VwICJJbnRlZ3JhdGlvbiBEZWxpdmVyeSBQbGFuZSIgewogICAgICAgICAgICAgICAgZ3JvdXAgIkNJL0NEIFBpcGVsaW5lIiB7CiAgICAgICAgICAgICAgICAgICAgc29mdHdhcmVTeXN0ZW0gY2kgIkNJIFBpcGVsaW5lcyIgIkdpdEh1YiBBY3Rpb25zIiB7CiAgICAgICAgICAgICAgICAgICAgICAgIHRhZ3MgIkFtYXpvbiBXZWIgU2VydmljZXMgLSBBV1MgQ29kZVBpcGVsaW5lIgogICAgICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICAgICAgICBzb2Z0d2FyZVN5c3RlbSBjZCAiQ0QgUGlwZWxpbmVzIiAiR2l0SHViIEFjdGlvbnMiIHsKICAgICAgICAgICAgICAgICAgICAgICAgdGFncyAiQW1hem9uIFdlYiBTZXJ2aWNlcyAtIEFXUyBDb2RlUGlwZWxpbmUiCiAgICAgICAgICAgICAgICAgICAgfQogICAgICAgICAgICAgICAgfQoKICAgICAgICAgICAgICAgIGdyb3VwICJSZWdpc3RyeSIgewogICAgICAgICAgICAgICAgICAgIHNvZnR3YXJlU3lzdGVtIHBhY2thZ2VSZWdpc3RyeSAiUGFja2FnZSBSZWdpc3RyeSIgIlBhY2thZ2lzdCwgbnBtLCBldGMuIiB7CiAgICAgICAgICAgICAgICAgICAgICAgIHRhZ3MgIk1pY3Jvc29mdCBBenVyZSAtIENvbnRhaW5lciBSZWdpc3RyaWVzIgogICAgICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICAgICAgICBzb2Z0d2FyZVN5c3RlbSBjb250YWluZXJSZWdpc3RyeSAiQ29udGFpbmVyIFJlZ2lzdHJ5IiAiRG9ja2VyLCBldGMuIiB7CiAgICAgICAgICAgICAgICAgICAgICAgIHRhZ3MgIk1pY3Jvc29mdCBBenVyZSAtIENvbnRhaW5lciBSZWdpc3RyaWVzIgogICAgICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICAgICAgICBzb2Z0d2FyZVN5c3RlbSBhcnRpZmFjdFJlZ2lzdHJ5ICJBcnRpZmFjdCBSZWdpc3RyeSIgIkFydGlmYWN0b3J5LCBldGMuIiB7CiAgICAgICAgICAgICAgICAgICAgICAgIHRhZ3MgIk1pY3Jvc29mdCBBenVyZSAtIENvbnRhaW5lciBSZWdpc3RyaWVzIgogICAgICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgfQoKICAgICAgICAgICAgZ3JvdXAgIk1vbml0b3JpbmcgYW5kIExvZ2dpbmcgUGxhbmUiIHsKICAgICAgICAgICAgICAgIGdyb3VwICJPYnNlcnZhYmlsaXR5IiB7CiAgICAgICAgICAgICAgICAgICAgc29mdHdhcmVTeXN0ZW0gZ3JhZmFuYSAiR3JhZmFuYSIgIkxvZ3MvVHJhY2VzL01ldHJpY3MgdmlzdWFsaXphdGlvbiIgewogICAgICAgICAgICAgICAgICAgICAgICB0YWdzICJNaWNyb3NvZnQgQXp1cmUgLSBBY3Rpdml0eSBMb2ciCiAgICAgICAgICAgICAgICAgICAgICAgIHRhZ3MgIk1pY3Jvc29mdCBBenVyZSAtIE1ldHJpY3MiCiAgICAgICAgICAgICAgICAgICAgfQogICAgICAgICAgICAgICAgICAgIHNvZnR3YXJlU3lzdGVtIGNvbGxlY3RvciAiQ29sbGVjdG9yIiAiQ29sbGVjdHMgbG9ncywgdHJhY2VzLCBhbmQgbWV0cmljcyIgewogICAgICAgICAgICAgICAgICAgICAgICB0YWdzICJBbWF6b24gV2ViIFNlcnZpY2VzIC0gQVdTIFgtUmF5IgogICAgICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICAgIH0KCiAgICAgICAgICAgICAgICBncm91cCAiTW9uaXRvcmluZyIgewogICAgICAgICAgICAgICAgICAgIHNvZnR3YXJlU3lzdGVtIG1vbml0b3JpbmcgIk1vbml0b3JpbmcgVG9vbHMiICJUcmFja3Mgc3lzdGVtIHBlcmZvcm1hbmNlIGFuZCBoZWFsdGgiIHsKICAgICAgICAgICAgICAgICAgICAgICAgdGFncyAiTWljcm9zb2Z0IEF6dXJlIC0gQXp1cmUgTW9uaXRvciBEYXNoYm9hcmQiCiAgICAgICAgICAgICAgICAgICAgfQogICAgICAgICAgICAgICAgfQogICAgICAgICAgICB9CgogICAgICAgICAgICBncm91cCAiU2VjdXJpdHkgUGxhbmUiIHsKICAgICAgICAgICAgICAgIHNvZnR3YXJlU3lzdGVtIHNlY3JldE1hbmFnZW1lbnQgIlNlY3JldCBNYW5hZ2VtZW50IFNlcnZpY2VzIiAiTWFuYWdlcyBzZWNyZXRzIGFuZCBjcmVkZW50aWFscyIgewogICAgICAgICAgICAgICAgICAgIHRhZ3MgIk1pY3Jvc29mdCBBenVyZSAtIE5ldHdvcmsgU2VjdXJpdHkgR3JvdXBzIgogICAgICAgICAgICAgICAgfQogICAgICAgICAgICB9CgogICAgICAgICAgICBncm91cCAiUmVzb3VyY2UgUGxhbmUiIHsKICAgICAgICAgICAgICAgIHNvZnR3YXJlU3lzdGVtIHNlcnZlcnMgIlNlcnZlcnMiICJQaHlzaWNhbCBvciB2aXJ0dWFsIG1hY2hpbmVzIiB7CiAgICAgICAgICAgICAgICAgICAgdGFncyAiTWljcm9zb2Z0IEF6dXJlIC0gU3BvdCBWTSIKICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICAgIHNvZnR3YXJlU3lzdGVtIG5ldHdvcmtpbmcgIk5ldHdvcmtpbmciICJDb25uZWN0cyBzZXJ2ZXJzIGFuZCBzZXJ2aWNlcyIgewogICAgICAgICAgICAgICAgICAgIHRhZ3MgIk1pY3Jvc29mdCBBenVyZSAtIFZpcnR1YWwgTmV0d29ya3MiCiAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgICBzb2Z0d2FyZVN5c3RlbSBsb2FkQmFsYW5jZXJzICJMb2FkIEJhbGFuY2VycyIgIkRpc3RyaWJ1dGVzIGluY29taW5nIG5ldHdvcmsgdHJhZmZpYyIgewogICAgICAgICAgICAgICAgICAgIHRhZ3MgIkFtYXpvbiBXZWIgU2VydmljZXMgLSBFbGFzdGljIExvYWQgQmFsYW5jaW5nIgogICAgICAgICAgICAgICAgfQogICAgICAgICAgICB9CiAgICAgICAgfQoKICAgICAgICAvLyBSZWxhdGlvbnNoaXBzCi8vICAgICAgICBkZXZlbG9wZXIgLT4gaWRlICJVc2VzIgovLyAgICAgICAgZGV2ZWxvcGVyIC0+IGRiYyAiVXNlcyIKLy8gICAgICAgIGRldmVsb3BlciAtPiBpZHAgIkFjY2Vzc2VzIgovLyAgICAgICAgaWRlIC0+IGFwcFNvdXJjZSAiRWRpdHMiCi8vICAgICAgICBpZGUgLT4gd29ya2Zsb3dTb3VyY2UgIkVkaXRzIgogICAgfQoKICAgIHZpZXdzIHsKICAgICAgICBzeXN0ZW1MYW5kc2NhcGUgewogICAgICAgICAgICBpbmNsdWRlICoKICAgICAgICB9CgogICAgICAgIHN0eWxlcyB7CiAgICAgICAgICAgIGVsZW1lbnQgIlBlcnNvbiIgewogICAgICAgICAgICAgICAgc2hhcGUgcGVyc29uCiAgICAgICAgICAgIH0KICAgICAgICB9CgogICAgICAgIHRoZW1lIGh0dHBzOi8vcmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbS9zdHJ1Y3R1cml6ci90aGVtZXMvcmVmcy9oZWFkcy9tYXN0ZXIvbWljcm9zb2Z0LWF6dXJlLTIwMjMuMDEuMjQvdGhlbWUuanNvbgogICAgICAgIHRoZW1lIGh0dHBzOi8vcmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbS9zdHJ1Y3R1cml6ci90aGVtZXMvcmVmcy9oZWFkcy9tYXN0ZXIvYW1hem9uLXdlYi1zZXJ2aWNlcy0yMDIzLjAxLjMxL3RoZW1lLmpzb24KCiAgICB9Cn0="
+  },
+  "views": {
+    "configuration": {
+      "branding": {},
+      "lastSavedView": "SystemLandscape-001",
+      "styles": {
+        "elements": [
+          {
+            "shape": "Person",
+            "tag": "Person"
+          }
+        ]
+      },
+      "terminology": {},
+      "themes": [
+        "https://raw.githubusercontent.com/structurizr/themes/refs/heads/master/microsoft-azure-2023.01.24/theme.json",
+        "https://raw.githubusercontent.com/structurizr/themes/refs/heads/master/amazon-web-services-2023.01.31/theme.json"
+      ]
+    },
+    "systemLandscapeViews": [
+      {
+        "dimensions": {
+          "height": 3668,
+          "width": 5800
+        },
+        "elements": [
+          {
+            "id": "1",
+            "x": 1622,
+            "y": 199
+          },
+          {
+            "id": "2",
+            "x": 872,
+            "y": 199
+          },
+          {
+            "id": "3",
+            "x": 1567,
+            "y": 794
+          },
+          {
+            "id": "4",
+            "x": 817,
+            "y": 794
+          },
+          {
+            "id": "5",
+            "x": 2327,
+            "y": 1294
+          },
+          {
+            "id": "6",
+            "x": 1577,
+            "y": 1294
+          },
+          {
+            "id": "7",
+            "x": 827,
+            "y": 1294
+          },
+          {
+            "id": "8",
+            "x": 2322,
+            "y": 789
+          },
+          {
+            "id": "9",
+            "x": 2957,
+            "y": 1935
+          },
+          {
+            "id": "10",
+            "x": 3707,
+            "y": 1935
+          },
+          {
+            "id": "11",
+            "x": 2327,
+            "y": 1925
+          },
+          {
+            "id": "12",
+            "x": 1577,
+            "y": 1925
+          },
+          {
+            "id": "13",
+            "x": 827,
+            "y": 1925
+          },
+          {
+            "id": "14",
+            "x": 1552,
+            "y": 2534
+          },
+          {
+            "id": "15",
+            "x": 802,
+            "y": 2534
+          },
+          {
+            "id": "16",
+            "x": 2122,
+            "y": 2535
+          },
+          {
+            "id": "17",
+            "x": 782,
+            "y": 3060
+          },
+          {
+            "id": "18",
+            "x": 4315,
+            "y": 2660
+          },
+          {
+            "id": "19",
+            "x": 4310,
+            "y": 2270
+          },
+          {
+            "id": "20",
+            "x": 4315,
+            "y": 1895
+          }
+        ],
+        "enterpriseBoundaryVisible": true,
+        "generatedKey": true,
+        "key": "SystemLandscape-001",
+        "order": 1
+      }
+    ]
+  }
+}
