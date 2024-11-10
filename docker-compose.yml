@@ -52,7 +52,6 @@ services:
     volumes:
       - ~/.config/mkcert:/root/.local/share/mkcert:ro
       - certificate-data:/certificate-data:rw
-      - /var/run/docker.sock:/var/run/docker.sock
     entrypoint: [ "/app/entrypoint.sh", "backstage.test" ]
 #  backstage:
 #    container_name: backstage

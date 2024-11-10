@@ -48,8 +48,9 @@ RUN --mount=type=cache,target=/home/node/.cache/yarn,sharing=locked,uid=1000,gid
 
 COPY --chown=node:node . .
 
-RUN yarn --cwd packages/backend add @backstage/plugin-catalog-backend-module-github
-RUN yarn --cwd packages/backend add @backstage/plugin-catalog-backend-module-github-org
+RUN yarn --cwd packages/backend add \
+    @backstage/plugin-catalog-backend-module-github \
+    @backstage/plugin-catalog-backend-module-github-org
 
 RUN NODE_OPTIONS="--max_old_space_size=4096" yarn tsc
 RUN yarn --cwd packages/backend build
@@ -78,6 +79,21 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     apt-get update && \
     apt-get install -y --no-install-recommends libsqlite3-dev && \
     rm -rf /var/lib/apt/lists/*
+
+# This is for local techdocs generation
+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,target=/var/lib/apt,sharing=locked \
+    apt-get update && \
+    apt-get install -y --no-install-recommends python3 python3-pip python3-venv && \
+    rm -rf /var/lib/apt/lists/*
+
+ENV VIRTUAL_ENV=/opt/venv
+RUN python3 -m venv $VIRTUAL_ENV
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+
+RUN pip3 install mkdocs-techdocs-core markdown-inline-mermaid
+
+## End of techdocs generation
 
 # From here on we use the least-privileged `node` user to run the backend.
 USER node
