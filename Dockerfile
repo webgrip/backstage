@@ -81,6 +81,16 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     rm -rf /var/lib/apt/lists/*
 
 # This is for local techdocs generation
+RUN npm install -g @mermaid-js/mermaid-cli
+
+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,target=/var/lib/apt,sharing=locked \
+    apt-get update && \
+    apt-get install -y --no-install-recommends chromium && \
+    rm -rf /var/lib/apt/lists/*
+
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
+
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,target=/var/lib/apt,sharing=locked \
     apt-get update && \
@@ -91,7 +101,11 @@ ENV VIRTUAL_ENV=/opt/venv
 RUN python3 -m venv $VIRTUAL_ENV
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
-RUN pip3 install mkdocs-techdocs-core markdown-inline-mermaid
+RUN pip3 install mkdocs-techdocs-core \
+    mkdocs-mermaid2-plugin \
+    markdown-inline-mermaid \
+    mkdocs-macros-plugin \
+    mkdocs-material-extensions
 
 ## End of techdocs generation
 
