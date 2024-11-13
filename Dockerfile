@@ -50,7 +50,8 @@ COPY --chown=node:node . .
 
 RUN yarn --cwd packages/backend add \
     @backstage/plugin-catalog-backend-module-github \
-    @backstage/plugin-catalog-backend-module-github-org
+    @backstage/plugin-catalog-backend-module-github-org \
+    @backstage/plugin-github-actions
 
 RUN NODE_OPTIONS="--max_old_space_size=4096" yarn tsc
 RUN yarn --cwd packages/backend build

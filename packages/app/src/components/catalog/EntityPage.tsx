@@ -81,6 +81,12 @@ import {
 } from '@backstage/plugin-techdocs-module-addons-contrib';
 import { EntityTechdocsContent } from '@backstage/plugin-techdocs';
 
+import {
+  EntityGithubActionsContent,
+  EntityRecentGithubActionsRunsCard,
+  isGithubActionsAvailable,
+} from '@backstage/plugin-github-actions';
+
 const customEntityFilterKind = ['Component', 'API', 'System'];
 
 const EntityLayoutWrapper = (props: { children?: ReactNode }) => {
@@ -132,6 +138,12 @@ export const cicdContent = (
         }
       />
     </EntitySwitch.Case>
+    <EntitySwitch.Case if={isGithubActionsAvailable}>
+      <Grid item sm={6}>
+        <EntityRecentGithubActionsRunsCard limit={4} variant="gridItem" />
+      </Grid>
+      <EntityGithubActionsContent />
+    </EntitySwitch.Case>
   </EntitySwitch>
 );
 
@@ -169,6 +181,14 @@ const overviewContent = (
     <Grid item md={6} xs={12}>
       <EntityAboutCard variant="gridItem" />
     </Grid>
+
+    <EntitySwitch>
+      <EntitySwitch.Case if={isGithubActionsAvailable}>
+        <Grid item sm={6} xs={12}>
+          <EntityRecentGithubActionsRunsCard limit={4} variant="gridItem" />
+        </Grid>
+      </EntitySwitch.Case>
+    </EntitySwitch>
 
     <Grid item md={6} xs={12}>
       <EntityCatalogGraphCard variant="gridItem" height={400} />
