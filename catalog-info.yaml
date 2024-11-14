@@ -25,6 +25,7 @@ metadata:
     backstage.io/techdocs-ref: dir:.
     backstage.io/kubernetes-label-selector: 'app.kubernetes.io/name=backstage'
     backstage.io/code-coverage: enabled
+    simpleicons.org/icon-slug: backstage
 spec:
   type: service
   owner: group:webgrip/backstage
