@@ -85,7 +85,26 @@ import {
   EntityGithubActionsContent,
   EntityRecentGithubActionsRunsCard,
   isGithubActionsAvailable,
-} from '@backstage/plugin-github-actions';
+} from '@backstage-community/plugin-github-actions';
+
+import {
+  EntityGithubPullRequestsContent,
+  EntityGithubPullRequestsOverviewCard,
+  isGithubPullRequestsAvailable,
+  isGithubTeamPullRequestsAvailable,
+  EntityGithubGroupPullRequestsCard,
+} from '@roadiehq/backstage-plugin-github-pull-requests';
+
+import {
+  EntityGithubInsightsContent,
+  EntityGithubInsightsComplianceCard,
+  // EntityGithubInsightsContributorsCard,
+  EntityGithubInsightsLanguagesCard,
+  EntityGithubInsightsReadmeCard,
+  EntityGithubInsightsReleasesCard,
+  // EntityGithubInsightsEnvironmentsCard,
+  isGithubInsightsAvailable,
+} from '@roadiehq/backstage-plugin-github-insights';
 
 const customEntityFilterKind = ['Component', 'API', 'System'];
 
@@ -178,23 +197,52 @@ const entityWarningContent = (
 const overviewContent = (
   <Grid container spacing={3} alignItems="stretch">
     {entityWarningContent}
-    <Grid item md={6} xs={12}>
+
+    <Grid item md={4} xs={12}>
       <EntityAboutCard variant="gridItem" />
     </Grid>
 
     <EntitySwitch>
+      <EntitySwitch.Case if={isGithubInsightsAvailable}>
+        <Grid item md={4} sm={6} xs={12}>
+          <EntityGithubInsightsReadmeCard maxHeight={350} />
+        </Grid>
+      </EntitySwitch.Case>
+    </EntitySwitch>
+
+    <Grid item md={4} sm={6} xs={12}>
+      <EntityCatalogGraphCard variant="gridItem" height={400} />
+    </Grid>
+
+    <EntitySwitch>
+      <EntitySwitch.Case if={isGithubInsightsAvailable}>
+        <Grid item md={2} sm={6} xs={12}>
+          <EntityGithubInsightsLanguagesCard />
+        </Grid>
+
+        <Grid item md={2} sm={6} xs={12}>
+          <EntityGithubInsightsReleasesCard />
+        </Grid>
+      </EntitySwitch.Case>
+    </EntitySwitch>
+
+    <EntitySwitch>
       <EntitySwitch.Case if={isGithubActionsAvailable}>
-        <Grid item sm={6} xs={12}>
+        <Grid item md={4} sm={6} xs={12}>
           <EntityRecentGithubActionsRunsCard limit={4} variant="gridItem" />
         </Grid>
       </EntitySwitch.Case>
     </EntitySwitch>
 
-    <Grid item md={6} xs={12}>
-      <EntityCatalogGraphCard variant="gridItem" height={400} />
-    </Grid>
+    <EntitySwitch>
+      <EntitySwitch.Case if={isGithubInsightsAvailable}>
+        <Grid item md={4} sm={6} xs={12}>
+          <EntityGithubInsightsComplianceCard />
+        </Grid>
+      </EntitySwitch.Case>
+    </EntitySwitch>
 
-    <Grid item md={4} xs={12}>
+    <Grid item md={6} xs={12}>
       <EntityLinksCard />
     </Grid>
 
@@ -206,7 +254,15 @@ const overviewContent = (
       </EntitySwitch.Case>
     </EntitySwitch>
 
-    <Grid item md={8} xs={12}>
+    <EntitySwitch>
+      <EntitySwitch.Case if={isGithubPullRequestsAvailable}>
+        <Grid item md={6} xs={12}>
+          <EntityGithubPullRequestsOverviewCard />
+        </Grid>
+      </EntitySwitch.Case>
+    </EntitySwitch>
+
+    <Grid item md={6} xs={12}>
       <EntityHasSubcomponentsCard variant="gridItem" />
     </Grid>
   </Grid>
@@ -220,6 +276,19 @@ const serviceEntityPage = (
 
     <EntityLayout.Route path="/ci-cd" title="CI/CD">
       {cicdContent}
+    </EntityLayout.Route>
+
+    <EntityLayout.Route
+      path="/pull-requests"
+      title="Pull Requests"
+      // Uncomment the line below if you'd like to only show the tab on entities with the correct annotations already set
+      // if={isGithubPullRequestsAvailable}
+    >
+      <EntityGithubPullRequestsContent />
+    </EntityLayout.Route>
+
+    <EntityLayout.Route path="/code-insights" title="Code Insights">
+      <EntityGithubInsightsContent />
     </EntityLayout.Route>
 
     <EntityLayout.Route path="/api" title="API">
@@ -369,6 +438,13 @@ const groupPage = (
     <EntityLayout.Route path="/" title="Overview">
       <Grid container spacing={3}>
         {entityWarningContent}
+        <EntitySwitch>
+          <EntitySwitch.Case if={isGithubTeamPullRequestsAvailable}>
+            <Grid item md={5} xs={12}>
+              <EntityGithubGroupPullRequestsCard />
+            </Grid>
+          </EntitySwitch.Case>
+        </EntitySwitch>
         <Grid item xs={12} md={6}>
           <EntityGroupProfileCard variant="gridItem" />
         </Grid>
@@ -410,6 +486,9 @@ const systemPage = (
           <EntityHasResourcesCard variant="gridItem" />
         </Grid>
       </Grid>
+    </EntityLayout.Route>
+    <EntityLayout.Route path="/ci-cd" title="CI/CD">
+      {cicdContent}
     </EntityLayout.Route>
     <EntityLayout.Route path="/diagram" title="Diagram">
       <EntityCatalogGraphCard

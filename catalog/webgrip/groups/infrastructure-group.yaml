@@ -3,7 +3,26 @@ kind: Group
 metadata:
   name: infrastructure
   namespace: webgrip
+  title: Infrastructure
   description: Infrastructure
+  labels:
+      tier: "1"
+  annotations:
+    github.com/project-slug: webgrip/infrastructure
+    simpleicons.org/icon-slug: mailtrap
+  tags:
+    - infrastructure
+    - operations
+  links:
+    - url: http://example.com/group/infrastructure/
+      title: Readme
+      icon: firefoxbrowser
+      type: website
+    - url: http://monitoring-platform.test/dashboard/infrastructure
+      title: Dashboard
+      icon: grafana
+      type: website
+
 spec:
   type: department
   profile:

@@ -31,6 +31,13 @@ import { HomePageSearchBar } from '@backstage/plugin-search';
 import React from 'react';
 import HomeIcon from '@material-ui/icons/Home';
 
+import Grid from '@material-ui/core/Grid';
+
+import {
+  HomePageRequestedReviewsCard,
+  HomePageYourOpenPullRequestsCard,
+} from '@roadiehq/backstage-plugin-github-pull-requests';
+
 const clockConfigs: ClockConfig[] = [
   {
     label: 'NYC',
@@ -109,6 +116,14 @@ export const homePage = (
         />
         <HomePageTopVisited />
         <HomePageRecentlyVisited />
+
+        <Grid item md={6} xs={12}>
+          <HomePageRequestedReviewsCard />
+        </Grid>
+
+        <Grid item md={6} xs={12}>
+          <HomePageYourOpenPullRequestsCard query="org:RoadieHQ is:pr language:CSS" />
+        </Grid>
       </CustomHomepageGrid>
     </Content>
   </Page>

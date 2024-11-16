@@ -62,7 +62,7 @@ import {
   UserSettingsPage,
 } from '@backstage/plugin-user-settings';
 import { AdvancedSettings } from './components/advancedSettings';
-import AlarmIcon from '@material-ui/icons/Alarm';
+// import AlarmIcon from '@material-ui/icons/Alarm';
 import React from 'react';
 import { Navigate, Route } from 'react-router-dom';
 import { apis } from './apis';
@@ -86,14 +86,16 @@ import {
   UserNotificationSettingsCard,
 } from '@backstage/plugin-notifications';
 
+import {
+  // simpleIcons,
+  simpleIconsColor,
+} from '@dweber019/backstage-plugin-simple-icons';
+
 import { githubAuthApiRef } from '@backstage/core-plugin-api';
 
 const app = createApp({
   apis,
-  icons: {
-    // Custom icon example
-    alert: AlarmIcon,
-  },
+  icons: simpleIconsColor,
   featureFlags: [
     {
       name: 'scaffolder-next-preview',

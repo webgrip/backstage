@@ -27,6 +27,12 @@ import {
 } from '@backstage/core-plugin-api';
 import { AuthProxyDiscoveryApi } from './AuthProxyDiscoveryApi';
 
+import {
+  catalogApiRef,
+  entityPresentationApiRef,
+} from '@backstage/plugin-catalog-react';
+import { SimpleIconsEntityPresentationApi } from '@dweber019/backstage-plugin-simple-icons';
+
 export const apis: AnyApiFactory[] = [
   createApiFactory({
     api: discoveryApiRef,
@@ -40,4 +46,12 @@ export const apis: AnyApiFactory[] = [
   }),
 
   ScmAuth.createDefaultApiFactory(),
+
+  createApiFactory({
+    api: entityPresentationApiRef,
+    deps: { catalogApi: catalogApiRef },
+    factory: ({ catalogApi }) => {
+      return SimpleIconsEntityPresentationApi.create({ catalogApi });
+    },
+  }),
 ];
