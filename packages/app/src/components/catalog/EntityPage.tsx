@@ -198,57 +198,49 @@ const overviewContent = (
   <Grid container spacing={3} alignItems="stretch">
     {entityWarningContent}
 
-    <Grid item md={4} xs={12}>
+    <Grid item xl={4} lg={6} md={6} sm={12} xs={12}>
       <EntityAboutCard variant="gridItem" />
     </Grid>
 
     <EntitySwitch>
       <EntitySwitch.Case if={isGithubInsightsAvailable}>
-        <Grid item md={4} sm={6} xs={12}>
+        <Grid item xl={4} lg={6} md={6} sm={12} xs={12}>
           <EntityGithubInsightsReadmeCard maxHeight={350} />
         </Grid>
-      </EntitySwitch.Case>
-    </EntitySwitch>
 
-    <Grid item md={4} sm={6} xs={12}>
-      <EntityCatalogGraphCard variant="gridItem" height={400} />
-    </Grid>
+        <Grid item xl={4} lg={6} md={6} sm={12} xs={12}>
+          <EntityRecentGithubActionsRunsCard limit={4} variant="gridItem" />
+        </Grid>
 
-    <EntitySwitch>
-      <EntitySwitch.Case if={isGithubInsightsAvailable}>
-        <Grid item md={2} sm={6} xs={12}>
+        <Grid item xl={2} lg={3} md={6} sm={12} xs={12}>
           <EntityGithubInsightsLanguagesCard />
         </Grid>
 
-        <Grid item md={2} sm={6} xs={12}>
+        <Grid item xl={2} lg={3} md={6} sm={12} xs={12}>
           <EntityGithubInsightsReleasesCard />
         </Grid>
       </EntitySwitch.Case>
     </EntitySwitch>
 
-    <EntitySwitch>
-      <EntitySwitch.Case if={isGithubActionsAvailable}>
-        <Grid item md={4} sm={6} xs={12}>
-          <EntityRecentGithubActionsRunsCard limit={4} variant="gridItem" />
-        </Grid>
-      </EntitySwitch.Case>
-    </EntitySwitch>
+    <Grid item xl={4} lg={6} md={6} sm={12} xs={12}>
+      <EntityCatalogGraphCard variant="gridItem" height={400} />
+    </Grid>
 
     <EntitySwitch>
       <EntitySwitch.Case if={isGithubInsightsAvailable}>
-        <Grid item md={4} sm={6} xs={12}>
+        <Grid item xl={4} lg={6} md={12} sm={12} xs={12}>
           <EntityGithubInsightsComplianceCard />
         </Grid>
       </EntitySwitch.Case>
     </EntitySwitch>
 
-    <Grid item md={6} xs={12}>
+    <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
       <EntityLinksCard />
     </Grid>
 
     <EntitySwitch>
       <EntitySwitch.Case if={hasLabels}>
-        <Grid item md={4} xs={12}>
+        <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
           <EntityLabelsCard />
         </Grid>
       </EntitySwitch.Case>
@@ -256,13 +248,13 @@ const overviewContent = (
 
     <EntitySwitch>
       <EntitySwitch.Case if={isGithubPullRequestsAvailable}>
-        <Grid item md={6} xs={12}>
+        <Grid item xl={6} lg={12} md={12} sm={12} xs={12}>
           <EntityGithubPullRequestsOverviewCard />
         </Grid>
       </EntitySwitch.Case>
     </EntitySwitch>
 
-    <Grid item md={6} xs={12}>
+    <Grid item xl={6} lg={12} md={12} sm={12} xs={12}>
       <EntityHasSubcomponentsCard variant="gridItem" />
     </Grid>
   </Grid>
