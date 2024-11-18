@@ -19,8 +19,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import HomeIcon from '@material-ui/icons/Home';
 import RuleIcon from '@material-ui/icons/AssignmentTurnedIn';
 import MapIcon from '@material-ui/icons/MyLocation';
-import LayersIcon from '@material-ui/icons/Layers';
-import PlaylistPlayIcon from '@material-ui/icons/PlaylistPlay';
+// import LayersIcon from '@material-ui/icons/Layers';
+// import PlaylistPlayIcon from '@material-ui/icons/PlaylistPlay';
 import CreateComponentIcon from '@material-ui/icons/AddCircleOutline';
 import SearchIcon from '@material-ui/icons/Search';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -149,8 +149,8 @@ export const Root = ({ children }: PropsWithChildren<{}>) => (
           to="docs"
           text="Docs"
         />
-        <SidebarItem icon={PlaylistPlayIcon} to="playlist" text="Playlists" />
-        <SidebarItem icon={LayersIcon} to="explore" text="Explore" />
+        {/* <SidebarItem icon={PlaylistPlayIcon} to="playlist" text="Playlists" />*/}
+        {/* <SidebarItem icon={LayersIcon} to="explore" text="Explore" />*/}
         <SidebarItem icon={CreateComponentIcon} to="create" text="Create..." />
         {/* End global nav */}
         <SidebarDivider />
