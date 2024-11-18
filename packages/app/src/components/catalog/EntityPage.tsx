@@ -158,10 +158,12 @@ export const cicdContent = (
       />
     </EntitySwitch.Case>
     <EntitySwitch.Case if={isGithubActionsAvailable}>
-      <Grid item sm={6}>
+      <Grid item xs={12}>
         <EntityRecentGithubActionsRunsCard limit={4} variant="gridItem" />
       </Grid>
-      <EntityGithubActionsContent />
+      <Grid item xs={12}>
+        <EntityGithubActionsContent />
+      </Grid>
     </EntitySwitch.Case>
   </EntitySwitch>
 );
@@ -198,12 +200,12 @@ const overviewContent = (
   <Grid container spacing={3} alignItems="stretch">
     {entityWarningContent}
 
-    <Grid item xl={4} lg={6} md={6} sm={12} xs={12}>
-      <EntityAboutCard variant="gridItem" />
-    </Grid>
-
     <EntitySwitch>
       <EntitySwitch.Case if={isGithubInsightsAvailable}>
+        <Grid item xl={4} lg={6} md={6} sm={12} xs={12}>
+          <EntityAboutCard variant="gridItem" />
+        </Grid>
+
         <Grid item xl={4} lg={6} md={6} sm={12} xs={12}>
           <EntityGithubInsightsReadmeCard maxHeight={350} />
         </Grid>
@@ -219,29 +221,41 @@ const overviewContent = (
         <Grid item xl={2} lg={3} md={6} sm={12} xs={12}>
           <EntityGithubInsightsReleasesCard />
         </Grid>
-      </EntitySwitch.Case>
-    </EntitySwitch>
 
-    <Grid item xl={4} lg={6} md={6} sm={12} xs={12}>
-      <EntityCatalogGraphCard variant="gridItem" height={400} />
-    </Grid>
+        <Grid item xl={4} lg={6} md={6} sm={12} xs={12}>
+          <EntityCatalogGraphCard variant="gridItem" height={400} />
+        </Grid>
 
-    <EntitySwitch>
-      <EntitySwitch.Case if={isGithubInsightsAvailable}>
         <Grid item xl={4} lg={6} md={12} sm={12} xs={12}>
           <EntityGithubInsightsComplianceCard />
         </Grid>
       </EntitySwitch.Case>
-    </EntitySwitch>
 
-    <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
-      <EntityLinksCard />
-    </Grid>
+      <EntitySwitch.Case>
+        <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
+          <EntityAboutCard variant="gridItem" />
+        </Grid>
+
+        <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
+          <EntityCatalogGraphCard variant="gridItem" height={400} />
+        </Grid>
+      </EntitySwitch.Case>
+    </EntitySwitch>
 
     <EntitySwitch>
       <EntitySwitch.Case if={hasLabels}>
         <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
+          <EntityLinksCard />
+        </Grid>
+
+        <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
           <EntityLabelsCard />
+        </Grid>
+      </EntitySwitch.Case>
+
+      <EntitySwitch.Case>
+        <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+          <EntityLinksCard />
         </Grid>
       </EntitySwitch.Case>
     </EntitySwitch>
@@ -251,12 +265,18 @@ const overviewContent = (
         <Grid item xl={6} lg={12} md={12} sm={12} xs={12}>
           <EntityGithubPullRequestsOverviewCard />
         </Grid>
+
+        <Grid item xl={6} lg={12} md={12} sm={12} xs={12}>
+          <EntityHasSubcomponentsCard variant="gridItem" />
+        </Grid>
+      </EntitySwitch.Case>
+
+      <EntitySwitch.Case>
+        <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+          <EntityHasSubcomponentsCard variant="gridItem" />
+        </Grid>
       </EntitySwitch.Case>
     </EntitySwitch>
-
-    <Grid item xl={6} lg={12} md={12} sm={12} xs={12}>
-      <EntityHasSubcomponentsCard variant="gridItem" />
-    </Grid>
   </Grid>
 );
 
@@ -273,8 +293,7 @@ const serviceEntityPage = (
     <EntityLayout.Route
       path="/pull-requests"
       title="Pull Requests"
-      // Uncomment the line below if you'd like to only show the tab on entities with the correct annotations already set
-      // if={isGithubPullRequestsAvailable}
+      if={isGithubPullRequestsAvailable}
     >
       <EntityGithubPullRequestsContent />
     </EntityLayout.Route>
@@ -465,16 +484,16 @@ const systemPage = (
         <Grid item md={6}>
           <EntityAboutCard variant="gridItem" />
         </Grid>
-        <Grid item md={6} xs={12}>
+        <Grid item md={12} xs={12}>
           <EntityCatalogGraphCard variant="gridItem" height={400} />
         </Grid>
-        <Grid item md={6}>
+        <Grid item md={12}>
           <EntityHasComponentsCard variant="gridItem" />
         </Grid>
-        <Grid item md={6}>
+        <Grid item md={12}>
           <EntityHasApisCard variant="gridItem" />
         </Grid>
-        <Grid item md={6}>
+        <Grid item md={12}>
           <EntityHasResourcesCard variant="gridItem" />
         </Grid>
       </Grid>
@@ -515,7 +534,7 @@ const domainPage = (
         <Grid item md={6} xs={12}>
           <EntityCatalogGraphCard variant="gridItem" height={400} />
         </Grid>
-        <Grid item md={6}>
+        <Grid item md={12}>
           <EntityHasSystemsCard variant="gridItem" />
         </Grid>
       </Grid>
