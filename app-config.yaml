@@ -45,13 +45,15 @@ backend:
   listen:
     port: 7007
   database:
-    client: pg
-    connection:
-      host: ${POSTGRES_HasOST}
-      port: ${POSTGRES_PORT}
-      user: ${POSTGRES_USER}
-      password: ${POSTGRES_PASSWORD}
-    prefix: 'example_prefix_'
+    client: better-sqlite3
+    connection: ':memory:'
+#    client: pg
+#    connection:
+#      host: ${POSTGRES_HOST}
+#      port: ${POSTGRES_PORT}
+#      user: ${POSTGRES_USER}
+#      password: ${POSTGRES_PASSWORD}
+#    prefix: 'example_prefix_'
   cors:
     origin: http://localhost:7007
     methods: [GET, HEAD, PATCH, POST, PUT, DELETE]
@@ -68,8 +70,16 @@ backend:
   # workingDirectory: /tmp # Use this to configure a working directory for the scaffolder, defaults to the OS temp-dir
 
 # See README.md in the proxy-backend plugin for information on the configuration format
-#proxy:
-#  endpoints:
+sentry:
+  organization: vendic
+
+proxy:
+  endpoints:
+    '/sentry/api':
+      target: https://sentry.io/api/
+      allowedMethods: [ 'GET' ]
+      headers:
+        Authorization: Bearer ${SENTRY_TOKEN}
 #    '/circleci/api':
 #      target: https://circleci.com/api/v1.1
 #      headers:
@@ -109,11 +119,6 @@ backend:
 #      headers:
 #        Authorization: ${BUILDKITE_TOKEN}
 #
-#    '/sentry/api':
-#      target: https://sentry.io/api/
-#      allowedMethods: ['GET']
-#      headers:
-#        Authorization: ${SENTRY_TOKEN}
 #
 #    '/ilert':
 #      target: https://api.ilert.com
@@ -183,8 +188,6 @@ techdocs:
   publisher:
     type: 'local' # Alternatives - 'googleGcs' or 'awsS3' or 'azureBlobStorage' or 'openStackSwift'. Read documentation for using alternatives.
 
-
-
 dynatrace:
   baseUrl: https://your.dynatrace.instance.com
 
@@ -195,9 +198,6 @@ nomad:
 scorecards:
   jsonDataUrl: https://raw.githubusercontent.com/Oriflame/backstage-plugins/main/plugins/score-card/sample-data/
   wikiLinkTemplate: https://link-to-wiki/{id}
-
-#sentry:
-#  organization: my-company
 
 #rollbar:
 #  organization: my-company
@@ -229,36 +229,6 @@ integrations:
   github:
     - host: github.com
       token: ${GITHUB_TOKEN}
-  ### Example for how to add your GitHub Enterprise instance using the API:
-  # - host: ghe.example.net
-  #   apiBaseUrl: https://ghe.example.net/api/v3
-  #   token: ${GHE_TOKEN}
-  ### Example for how to add your GitHub Enterprise instance using raw HTTP fetches (token is optional):
-  # - host: ghe.example.net
-  #   rawBaseUrl: https://ghe.example.net/raw
-  #   token: ${GHE_TOKEN}
-#  gitlab:
-#    - host: gitlab.com
-#      token: ${GITLAB_TOKEN}
-  ### Example for how to add a bitbucket cloud integration
-  # bitbucketCloud:
-  #   - username: ${BITBUCKET_USERNAME}
-  #     appPassword: ${BITBUCKET_APP_PASSWORD}
-  ### Example for how to add your bitbucket server instance using the API:
-  # - host: server.bitbucket.com
-  #   apiBaseUrl: server.bitbucket.com
-  #   username: ${BITBUCKET_SERVER_USERNAME}
-  #   appPassword: ${BITBUCKET_SERVER_APP_PASSWORD}
-#  azure:
-#    - host: dev.azure.com
-#      token: ${AZURE_TOKEN}
-  #  googleGcs:
-  #    clientEmail: 'example@example.com'
-  #    privateKey: ${GCS_PRIVATE_KEY}
-#  awsS3:
-#    - endpoint: ${AWS_S3_ENDPOINT}
-#      accessKeyId: ${AWS_ACCESS_KEY_ID}
-#      secretAccessKey: ${AWS_SECRET_ACCESS_KEY}
 
 catalog:
   import:
@@ -290,7 +260,7 @@ catalog:
           repository: '.*' # Regex
         schedule: # same options as in SchedulerServiceTaskScheduleDefinition
           # supports cron, ISO duration, "human duration" as used in code
-          frequency: { minutes: 1 }
+          frequency: { minutes: 35 }
           # supports ISO duration, "human duration" as used in code
           timeout: { minutes: 3 }
       masterBranches:
@@ -375,41 +345,10 @@ catalog:
       #         filter: (&(objectClass=some-group-class)(!(groupType=email)))
 
   locations:
-    # Add a location here to ingest it, for example from a URL:
-    #
-    #     - type: url
-    #       target: https://github.com/backstage/backstage/blob/master/packages/catalog-model/examples/all.yaml
-    #
-    # For local development you can use a file location instead:
-    #
-    #     - type: file
-    #       target: ../catalog-model/examples/all-components.yaml
-    #
-    # File locations are relative to the current working directory of the
-    # backend, for example packages/backend/.
-
-    # Backstage example entities
-#    - type: file
-#      target: ./catalog/all.yaml
-    # Backstage example groups and users
     - type: file
       target: ./catalog/webgrip/webgrip-corporation.yaml
       rules:
        - allow: [User, Group, Location]
-    # Example component for github-actions and TechDocs
-    - type: file
-      target: ../../plugins/github-actions/examples/sample.yaml
-    # Example component for TechDocs
-    - type: file
-      target: ../../plugins/techdocs-backend/examples/documented-component/catalog-info.yaml
-    # Example component for ADRs
-    - type: file
-      target: ../../plugins/adr/examples/component/catalog-info.yaml
-    # Backstage example templates
-    - type: file
-      target: ../../plugins/scaffolder-backend/sample-templates/all-templates.yaml
-      rules:
-        - allow: [Template]
 scaffolder:
   # Use to customize default commit author info used when new components are created
   # defaultAuthor:
@@ -419,19 +358,7 @@ scaffolder:
   # defaultCommitMessage: 'Initial commit'
 
 auth:
-  ### Add auth.keyStore.provider to more granularly control how to store JWK data when running
-  # the auth-backend.
-  #
-  # keyStore:
-  #  provider: firestore
-  #  firestore:
-  #    projectId: my-project
-  #    path: my-sessions
-
   environment: development
-  ### Providing an auth.session.secret will enable session support in the auth-backend
-  # session:
-  #   secret: custom session secret
   providers:
 #    google:
 #      development:
@@ -441,74 +368,9 @@ auth:
       development:
         clientId: ${AUTH_GITHUB_CLIENT_ID}
         clientSecret: ${AUTH_GITHUB_CLIENT_SECRET}
-#        Uncomment if you are using GitHub Enterprise
-#        enterpriseInstanceUrl: ${AUTH_GITHUB_ENTERPRISE_INSTANCE_URL}
         signIn:
           resolvers:
             - resolver: emailMatchingUserEntityProfileEmail
-#    gitlab:
-#      development:
-#        clientId: ${AUTH_GITLAB_CLIENT_ID}
-#        clientSecret: ${AUTH_GITLAB_CLIENT_SECRET}
-#        audience: ${GITLAB_BASE_URL}
-#    saml:
-#      entryPoint: 'http://localhost:7001/'
-#      issuer: 'passport-saml'
-#      cert: 'fake-cert-base64'
-#    okta:
-#      development:
-#        clientId: ${AUTH_OKTA_CLIENT_ID}
-#        clientSecret: ${AUTH_OKTA_CLIENT_SECRET}
-#        audience: ${AUTH_OKTA_AUDIENCE}
-#    oauth2:
-#      development:
-#        clientId: ${AUTH_OAUTH2_CLIENT_ID}
-#        clientSecret: ${AUTH_OAUTH2_CLIENT_SECRET}
-#        authorizationUrl: ${AUTH_OAUTH2_AUTH_URL}
-#        tokenUrl: ${AUTH_OAUTH2_TOKEN_URL}
-#        ###
-#        # provide a list of scopes as needed for your OAuth2 Server:
-#        #
-#        # scope: saml-login-selector openid profile email
-#    oidc:
-#      # Note that you must define a session secret (see above) since the oidc provider requires session support.
-#      # Note that by default, this provider will use the 'none' prompt which assumes that your are already logged on in the IDP.
-#      # You should set prompt to:
-#      # - auto: will let the IDP decide if you need to log on or if you can skip login when you have an active SSO session
-#      # - login: will force the IDP to always present a login form to the user
-#      development:
-#        metadataUrl: ${AUTH_OIDC_METADATA_URL}
-#        clientId: ${AUTH_OIDC_CLIENT_ID}
-#        clientSecret: ${AUTH_OIDC_CLIENT_SECRET}
-#        tokenEndpointAuthMethod: ${AUTH_OIDC_TOKEN_ENDPOINT_AUTH_METHOD} # default='client_secret_basic'
-#        tokenSignedResponseAlg: ${AUTH_OIDC_TOKEN_SIGNED_RESPONSE_ALG} # default='RS256'
-#        scope: ${AUTH_OIDC_SCOPE} # default='openid profile email'
-#        prompt: ${AUTH_OIDC_PROMPT} # default=none (allowed values: auto, none, consent, login)
-#    auth0:
-#      development:
-#        clientId: ${AUTH_AUTH0_CLIENT_ID}
-#        clientSecret: ${AUTH_AUTH0_CLIENT_SECRET}
-#        domain: ${AUTH_AUTH0_DOMAIN}
-#    microsoft:
-#      development:
-#        clientId: ${AUTH_MICROSOFT_CLIENT_ID}
-#        clientSecret: ${AUTH_MICROSOFT_CLIENT_SECRET}
-#        tenantId: ${AUTH_MICROSOFT_TENANT_ID}
-#    onelogin:
-#      development:
-#        clientId: ${AUTH_ONELOGIN_CLIENT_ID}
-#        clientSecret: ${AUTH_ONELOGIN_CLIENT_SECRET}
-#        issuer: ${AUTH_ONELOGIN_ISSUER}
-#    bitbucket:
-#      development:
-#        clientId: ${AUTH_BITBUCKET_CLIENT_ID}
-#        clientSecret: ${AUTH_BITBUCKET_CLIENT_SECRET}
-#    atlassian:
-#      development:
-#        clientId: ${AUTH_ATLASSIAN_CLIENT_ID}
-#        clientSecret: ${AUTH_ATLASSIAN_CLIENT_SECRET}
-#        scope: ${AUTH_ATLASSIAN_SCOPES}
-#    myproxy: {}
     guest: {}
 
 costInsights:

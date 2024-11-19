@@ -106,6 +106,12 @@ import {
   isGithubInsightsAvailable,
 } from '@roadiehq/backstage-plugin-github-insights';
 
+import {
+  EntitySentryCard,
+  EntitySentryContent
+} from '@backstage-community/plugin-sentry';
+
+
 const customEntityFilterKind = ['Component', 'API', 'System'];
 
 const EntityLayoutWrapper = (props: { children?: ReactNode }) => {
@@ -199,6 +205,10 @@ const entityWarningContent = (
 const overviewContent = (
   <Grid container spacing={3} alignItems="stretch">
     {entityWarningContent}
+
+    <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+      <EntitySentryCard />
+    </Grid>
 
     <EntitySwitch>
       <EntitySwitch.Case if={isGithubInsightsAvailable}>
@@ -298,6 +308,10 @@ const serviceEntityPage = (
       <EntityGithubPullRequestsContent />
     </EntityLayout.Route>
 
+    <EntityLayout.Route path="/sentry" title="Sentry">
+      <EntitySentryContent />
+    </EntityLayout.Route>
+
     <EntityLayout.Route path="/code-insights" title="Code Insights">
       <EntityGithubInsightsContent />
     </EntityLayout.Route>
@@ -342,6 +356,21 @@ const websiteEntityPage = (
 
     <EntityLayout.Route path="/ci-cd" title="CI/CD">
       {cicdContent}
+    </EntityLayout.Route>
+
+    <EntityLayout.Route path="/sentry" title="Sentry">
+      <EntitySentryContent />
+    </EntityLayout.Route>
+
+    <EntityLayout.Route path="/api" title="API">
+      <Grid container spacing={3} alignItems="stretch">
+        <Grid item xs={12} md={6}>
+          <EntityProvidedApisCard />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <EntityConsumedApisCard />
+        </Grid>
+      </Grid>
     </EntityLayout.Route>
 
     <EntityLayout.Route path="/dependencies" title="Dependencies">
