@@ -55,6 +55,7 @@ backend:
     connect-src: ["'self'", 'http:', 'https:']
     # Content-Security-Policy directives follow the Helmet format: https://helmetjs.github.io/#reference
     # Default Helmet Content-Security-Policy values can be removed by setting the key to false
+    img-src: ["'self'", 'data:', 'https://avatars.githubusercontent.com', 'https://img.shields.io']
   reading:
     allow:
       - host: example.com
