@@ -6,3 +6,4 @@ plugins/*/dist
 plugins/*/node_modules
 *.local.yaml
 Dockerfile
+docker-compose.yml

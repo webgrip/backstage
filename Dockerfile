@@ -49,6 +49,7 @@ RUN --mount=type=cache,target=/home/node/.cache/yarn,sharing=locked,uid=1000,gid
 COPY --chown=node:node . .
 
 RUN yarn --cwd packages/backend add \
+    pg \
     @backstage/plugin-catalog-backend-module-github \
     @backstage/plugin-catalog-backend-module-github-org \
     @backstage-community/plugin-github-actions \
