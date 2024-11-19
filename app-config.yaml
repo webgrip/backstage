@@ -80,6 +80,12 @@ proxy:
       allowedMethods: [ 'GET' ]
       headers:
         Authorization: Bearer ${SENTRY_TOKEN}
+    '/newrelic/apm/api':
+      target: https://api.newrelic.com/v2
+      headers:
+        X-Api-Key: ${NEW_RELIC_REST_API_KEY}
+      allowedHeaders:
+        - link
 #    '/circleci/api':
 #      target: https://circleci.com/api/v1.1
 #      headers:
@@ -97,12 +103,6 @@ proxy:
 #        Authorization: ${TRAVISCI_AUTH_TOKEN}
 #        travis-api-version: '3'
 #
-#    '/newrelic/apm/api':
-#      target: https://api.newrelic.com/v2
-#      headers:
-#        X-Api-Key: ${NEW_RELIC_REST_API_KEY}
-#      allowedHeaders:
-#        - link
 #
 #    '/newrelic/api':
 #      target: https://api.newrelic.com

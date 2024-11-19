@@ -52,6 +52,7 @@ import Score from '@material-ui/icons/Score';
 import { useApp } from '@backstage/core-plugin-api';
 import BuildIcon from '@material-ui/icons/Build';
 import { NotificationsSidebarItem } from '@backstage/plugin-notifications';
+import ExtensionIcon from '@material-ui/icons/ExtensionOutlined';
 
 const useSidebarLogoStyles = makeStyles({
   root: {
@@ -153,6 +154,9 @@ export const Root = ({ children }: PropsWithChildren<{}>) => (
         {/* <SidebarItem icon={LayersIcon} to="explore" text="Explore" />*/}
         <SidebarItem icon={CreateComponentIcon} to="create" text="Create..." />
         {/* End global nav */}
+        <SidebarDivider />
+        <SidebarItem icon={ExtensionIcon} to="newrelic" text="New Relic" />
+
         <SidebarDivider />
         <SidebarScrollWrapper>
           <SidebarItem icon={MapIcon} to="tech-radar" text="Tech Radar" />

@@ -111,6 +111,12 @@ import {
   EntitySentryContent
 } from '@backstage-community/plugin-sentry';
 
+import {
+  isNewRelicDashboardAvailable,
+  EntityNewRelicDashboardContent,
+  EntityNewRelicDashboardCard,
+} from '@backstage-community/plugin-newrelic-dashboard';
+
 
 const customEntityFilterKind = ['Component', 'API', 'System'];
 
@@ -209,6 +215,14 @@ const overviewContent = (
     <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
       <EntitySentryCard />
     </Grid>
+
+    <EntitySwitch>
+      <EntitySwitch.Case if={isNewRelicDashboardAvailable}>
+        <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+          <EntityNewRelicDashboardCard />
+        </Grid>
+      </EntitySwitch.Case>
+    </EntitySwitch>
 
     <EntitySwitch>
       <EntitySwitch.Case if={isGithubInsightsAvailable}>
@@ -310,6 +324,14 @@ const serviceEntityPage = (
 
     <EntityLayout.Route path="/sentry" title="Sentry">
       <EntitySentryContent />
+    </EntityLayout.Route>
+
+    <EntityLayout.Route
+      if={isNewRelicDashboardAvailable}
+      path="/newrelic-dashboard"
+      title="New Relic Dashboard"
+    >
+      <EntityNewRelicDashboardContent />
     </EntityLayout.Route>
 
     <EntityLayout.Route path="/code-insights" title="Code Insights">

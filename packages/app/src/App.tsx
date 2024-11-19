@@ -91,6 +91,8 @@ import {
   simpleIconsColor,
 } from '@dweber019/backstage-plugin-simple-icons';
 
+import { NewRelicPage } from '@backstage/plugin-newrelic';
+
 import { githubAuthApiRef } from '@backstage/core-plugin-api';
 
 const app = createApp({
@@ -225,6 +227,8 @@ const routes = (
       {customDevToolsPage}
     </Route>
     <Route path="/notifications" element={<NotificationsPage />} />
+
+    <Route path="/newrelic" element={<NewRelicPage />} />
   </FlatRoutes>
 );
 

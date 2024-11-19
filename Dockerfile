@@ -59,7 +59,8 @@ RUN yarn --cwd packages/backend add \
     @k-phoen/backstage-plugin-grafana \
     @dweber019/backstage-plugin-simple-icons \
     && yarn --cwd packages/app add \
-    @backstage-community/plugin-sentry
+    @backstage-community/plugin-sentry \
+    @backstage-community/plugin-newrelic
 
 RUN NODE_OPTIONS="--max_old_space_size=4096" yarn tsc
 RUN yarn --cwd packages/backend build
