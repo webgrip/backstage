@@ -34,11 +34,6 @@ import {
 
 import { SimpleIconsEntityPresentationApi } from '@dweber019/backstage-plugin-simple-icons';
 
-import {
-  MockSentryApi,
-  sentryApiRef,
-} from '@backstage-community/plugin-sentry';
-
 export const apis: AnyApiFactory[] = [
   createApiFactory({
     api: discoveryApiRef,
@@ -60,5 +55,4 @@ export const apis: AnyApiFactory[] = [
       return SimpleIconsEntityPresentationApi.create({ catalogApi });
     },
   }),
-  createApiFactory(sentryApiRef, new MockSentryApi()),
 ];
