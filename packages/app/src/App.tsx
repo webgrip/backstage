@@ -91,7 +91,7 @@ import {
   simpleIconsColor,
 } from '@dweber019/backstage-plugin-simple-icons';
 
-import { NewRelicPage } from '@backstage/plugin-newrelic';
+import { NewRelicPage } from '@backstage-community/plugin-newrelic';
 
 import { githubAuthApiRef } from '@backstage/core-plugin-api';
 

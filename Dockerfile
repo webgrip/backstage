@@ -53,14 +53,14 @@ RUN yarn --cwd packages/backend add \
     @backstage/plugin-catalog-backend-module-github \
     @backstage/plugin-catalog-backend-module-github-org \
     @backstage-community/plugin-github-actions \
-    @backstage-community/plugin-newrelic \
     @roadiehq/backstage-plugin-github-pull-requests \
     @roadiehq/backstage-plugin-github-insights \
     @k-phoen/backstage-plugin-grafana \
     @dweber019/backstage-plugin-simple-icons \
     && yarn --cwd packages/app add \
     @backstage-community/plugin-sentry \
-    @backstage-community/plugin-newrelic
+    @backstage-community/plugin-newrelic \
+    @backstage-community/plugin-newrelic-dashboard
 
 RUN NODE_OPTIONS="--max_old_space_size=4096" yarn tsc
 RUN yarn --cwd packages/backend build
